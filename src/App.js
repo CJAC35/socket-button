@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {socket} from './client-socket.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: 'hello world'
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    socket.on('change-text', (data) => this.setState({text: data}));
+  }
+
+  handleClick(event) {
+    socket.emit('test', 'a user has clicked the button :o');
+    this.setState({text: 'you clicked the button :o'});
+    console.log('it should have emitted something');
+  }
+
+  render() {
+    return (
+      <>
+        <h1 className="hello"> {this.state.text} </h1>
+        <div className="button" onClick={this.handleClick}> CLICK HERE! </div>
+      </>
+    );
+  }
 }
+
+
+  
 
 export default App;

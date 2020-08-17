@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.button {
+  border: 2px black solid;
+  padding: 10px;
+  width: 200px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background-color: rgb(255, 198, 243);
+}
+
+.button:active {
+  background-color: rgb(255, 133, 229);
+}
+
+.hello {
+  width: 181px;
+  margin: 0 auto;
+  padding-top: 50px;
+  padding-bottom: 30px;
+
+}
